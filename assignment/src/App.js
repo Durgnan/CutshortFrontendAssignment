@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import OnboardingComponent from './components/OnboardingComponent/OnboardingComponent';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';

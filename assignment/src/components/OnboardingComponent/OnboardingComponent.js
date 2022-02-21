@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import StepperComponent from '../Stepper/StepperComponent'
 import Button from '@mui/material/Button';
-import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import {CheckCircleRounded, Person, Groups} from '@mui/icons-material';
 import Color from '../utils/Color'
-import { Form,FormLabel, InputGroup,FormControl } from 'react-bootstrap'
+import { Card,Form,FormLabel, InputGroup,FormControl } from 'react-bootstrap'
 
 const MainTitles = [
     "Welcome! First things first...",
@@ -31,12 +31,13 @@ const OnboardingComponent = () =>
     const incrementStep = () => 
     {
         incrementActiveStep(activeStep+1)
-        console.log(fullName,displayName,workspaceName,workspaceURL)
     }
 
     const submitDetails = () => 
     {
-        console.log(`fullName : ${fullName},displayName : ${displayName},workspaceName : ${workspaceName},workspaceURL : ${workspaceURL}`)
+        const result = `Full Name : ${fullName} \nDisplay Name : ${displayName} \nWorkspace Name : ${workspaceName} \nWorkspace URL : ${workspaceURL} \nFor Myself : ${forMyself}`
+        console.log(result)
+        alert(result)
     }
 
     
@@ -46,7 +47,7 @@ const OnboardingComponent = () =>
         <div>
             <StepperComponent activeStep={activeStep} />
 
-            {activeStep === 3 && <div><br/><br/><br/><CheckCircleRoundedIcon style={{fontSize:50, color: Color.PURPLE}}/></div>}
+            {activeStep === 3 && <div><br/><br/><br/><CheckCircleRounded style={{fontSize:50, color: Color.PURPLE,marginLeft:'48%'}}/></div>}
             
             <h1 className='mt-5' style={{color:Color.SLATE}}>{MainTitles[activeStep].replace('{displayName}',displayName)}</h1> 
             <h5 className='mt-2' style={{color:Color.DARK_GREY}}>{SecondaryTitles[activeStep]}</h5> 
@@ -54,7 +55,7 @@ const OnboardingComponent = () =>
             { activeStep === 0 && 
             <Form>
 
-                <FormLabel className="FormControlText" htmlFor="fullName">Full Name</FormLabel>
+                <FormLabel className="FormControlText" htmlFor="fullName" style={{textAlign:'left !important'}}>Full Name</FormLabel>
                 <InputGroup className="mb-3">
                     <FormControl required className="FormControlText" id='fullName' placeholder='Steve Jobs' type='text' value={fullName}  onChange={(event) => {setFullName(event.target.value)} }/>
                 </InputGroup>
@@ -80,8 +81,27 @@ const OnboardingComponent = () =>
                     <FormControl style={{marginRight:'30%'}}  id="workspaceURL" className="FormControlText" placeholder='Example' type='text' value={workspaceURL} onChange={(event) => {setWorkspaceURL(event.target.value)} }/>
                 </InputGroup>
             </Form>}
-            {activeStep < 3 && <Button variant="contained" onClick={() => incrementStep()} style={{backgroundColor: Color.PURPLE}}>Create Workspace</Button>}
-            {activeStep === 3 && <Button variant="contained" style={{backgroundColor: Color.PURPLE}} onClick={() => submitDetails()}>Launch {workspaceName}</Button>}
+            { activeStep === 2 &&
+            <div className="FormControlText mt-3 mb-5">
+                <Card style={{ marginLeft: '16%',marginRight: '8px',width: '12rem',float:'left',textAlign:'left', borderColor: forMyself? Color.PURPLE:Color.DARK_GREY }} onClick={()=> setForMyself(true)}>
+                    <Card.Body>
+                        <Person style={{color: forMyself? Color.PURPLE:Color.SLATE}}/><br/>
+                        <Card.Title>For myself</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Write better. Think more clearly. Stay organized.</Card.Subtitle>
+                    </Card.Body>
+                </Card>
+                <Card className="ml-5" style={{ width: '12rem',textAlign:'left', borderColor: !forMyself? Color.PURPLE:Color.DARK_GREY }} onClick={()=> setForMyself(false)}>
+                    <Card.Body>
+                        <Groups style={{color: !forMyself? Color.PURPLE:Color.SLATE}}/><br/>
+                        <Card.Title>With my Team</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">Wikis, docs, tasks and project, all in one place.</Card.Subtitle>
+                    </Card.Body>
+                </Card>
+            </div>
+            }
+
+            {activeStep < 3 && <Button variant="contained" onClick={() => incrementStep()} style={{backgroundColor: Color.PURPLE,marginLeft:'43%'}}>Create Workspace</Button>}
+            {activeStep === 3 && <Button variant="contained" style={{backgroundColor: Color.PURPLE,marginLeft:'43%'}} onClick={() => submitDetails()}>Launch {workspaceName}</Button>}
 
         </div>
     )

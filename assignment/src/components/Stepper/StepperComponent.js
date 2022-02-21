@@ -14,7 +14,7 @@ const StepperComponent = ({activeStep}) =>
             <br/><br/><br/><br/>
             <Stepper activeStep={activeStep} alternativeLabel style={{marginLeft: '25%', marginRight:'25%'}}>
                 {steps.map((label) => (
-                <Step key={label} style={{borderColor: Color.PURPLE}}>
+                <Step key={label} style={{color: Color.PURPLE,borderColor: Color.PURPLE,outlineColor: Color.PURPLE,}}>
                     <StepLabel></StepLabel>
                 </Step>
                 ))}

@@ -1,8 +1,10 @@
-.App {
-  text-align: center;
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active,
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: #5A4AD1 !important;
 }
 
-h1,h5, Button {
+h1,h5 {
   text-align: center;
 }
 
